@@ -23,7 +23,7 @@ Try to complete the list top to bottom and to label which parts are being worked
 	>Record of the piece on the space 
 	>Coordinates (X, Y, Z);
 	>Type of box (Special - moves 3 places ahead putting all pieces in its way to their start) 
-	>Color (White is default any other color is a slide pieces are not allowed to slide on its own color slide but can still move 					 	 	like its white)
+	>Color (White is default any other color is a slide pieces are not allowed to slide on its own color slide but can still move like its white)
 - [ ] Dices Class
 	> -  [ ] Roll Function (Rolls dice and return top int 1-6)
 - [ ] Start Class (Each named the color)
