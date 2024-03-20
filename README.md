@@ -14,7 +14,7 @@ Try to complete the list top to bottom and to label which parts are being worked
 
 # List
 
- - [x] Piece Class
+ - [ ] Piece Class
 	>Color
 	> Index (Location on board)
 	>Draw function (Takes in coordinates)
