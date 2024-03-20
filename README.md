@@ -16,7 +16,7 @@ Try to complete the list top to bottom and to label which parts are being worked
 
  - [ ] Piece Class
 	>Color
-	>Index (Location on board)
+	> Index (Location on board)
 	>Draw function (Takes in coordinates)
 
 - [ ] Box Class
