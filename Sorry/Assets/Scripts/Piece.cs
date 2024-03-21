@@ -7,6 +7,7 @@ using UnityEngine.VFX;
 public class Piece : MonoBehaviour
 {
     public string color;
+    public int index;
 
     Piece(string color)
     {
