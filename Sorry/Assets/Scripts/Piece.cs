@@ -1,26 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TerrainTools;
+using UnityEngine.VFX;
 
 public class Piece : MonoBehaviour
 {
-    public string Color;
-    
+    public string color;
 
-    // Start is called before the first frame update
-    void Start()
+    Piece(string color)
     {
-        
+        this.color = color;
     }
 
-    Piece() 
-    { 
-    
+    public void Move(int x, int y, int z)
+    {
+       //moves there
     }
 
-    // Update is called once per frame
-    void Update()
+    public void die()
     {
-        
+        //plays animation
+        //dies
     }
 }
