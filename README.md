@@ -48,4 +48,8 @@ Try to complete the list top to bottom and to label which parts are being worked
 	- Can leave start if 1 or 2
 	- If not in start just move ___ spaces
 	> - [ ]  Move Function
-	- Moves pieces from one box draws then move to next till its moved ___ times checking to see if it  	
+	- Moves pieces from one box draws then move to next till its moved ___ times checking to see if it
+
+>**Other**
+- every box is 1.25 units (either x or z) away
+
