@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    GameObject[] Pieces;
-    GameObject Piece; //add before game
+    GameObject[] Pieces; //all pieces in spawn
+    public GameObject Piece; //add before game,set color bedore game and index = -1
 
     void Start()
     {

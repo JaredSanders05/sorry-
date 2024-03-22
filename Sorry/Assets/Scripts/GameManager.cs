@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    GameObject Box;
+    public GameObject Box;
     List<GameObject> boxes;
 
     // Start is called before the first frame update

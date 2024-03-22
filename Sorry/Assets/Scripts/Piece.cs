@@ -6,18 +6,12 @@ using UnityEngine.VFX;
 
 public class Piece : MonoBehaviour
 {
-    GameObject Spawn; //set before game
-    string color;
-    int index;
+    public GameObject Spawn; //set before game
+    string color; //set before game
+    int index; 
 
-    //piece at spawn
-    Piece(string color)
-    {
-        this.color = color;
-        index = -1;
-    }
 
-    //piece added to gameboard
+    //Used to Initialize piece to gameboard
     Piece (string color, int index)
     {
         this.color = color;

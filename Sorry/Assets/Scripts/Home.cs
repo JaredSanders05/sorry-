@@ -5,7 +5,7 @@ using UnityEngine;
 public class Home : MonoBehaviour
 {
     GameObject[] Pieces;
-    GameObject Piece; //add before game, getColor to get color
+    public GameObject Piece; //add before game, getColor to get color
 
     public void add()
     {
