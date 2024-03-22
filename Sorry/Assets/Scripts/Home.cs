@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Home : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    GameObject[] Pieces;
+    GameObject Piece; //add before game, getColor to get color
+
+    public void add()
     {
-        
+        //adds piece to home circle
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //
     }
 }

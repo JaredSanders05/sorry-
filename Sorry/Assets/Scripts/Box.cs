@@ -4,20 +4,47 @@ using UnityEngine;
 
 public class Box : MonoBehaviour
 {
-    public GameObject piece;
-    public string type;
-  
+    GameObject piece;
+    string type;
+    int index;
 
-    Box(int x, int y, int z)
+    Box(string type, int index)
     {
         piece = null;
-        type = "white";
+        this.type = type;
+        this.index = index;
     }
 
-    Box(int x, int y, int z, string type) 
-    { 
-   
+    public void movePiece(Transform t)
+    {
+        piece.GetComponent<Piece>().Move(t);
+    }
+
+    //piece is set by trigger commands, 
+    private void OnTriggerEnter(Collider other)
+    {
+        piece = other.gameObject;
+        piece.GetComponent<Piece>().setIndex(index);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
         piece = null;
-        this.type = type;
+    }
+
+    public string getType()
+    { 
+        return type;
+    }
+
+    //may never be used
+    public int getIndex()
+    {
+        return index;
+    }
+
+    GameObject getPiece()
+    {
+        return piece;
     }
 }

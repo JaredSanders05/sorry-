@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public MonoScript Box;
-    List<MonoScript> boxes;
+    GameObject Box;
+    List<GameObject> boxes;
 
     // Start is called before the first frame update
     void Start()
     {
-        boxes = new List<MonoScript>();
-            
+        boxes = new List<GameObject>();
+        //initialize boxes
     }
 
     // Update is called once per frame
