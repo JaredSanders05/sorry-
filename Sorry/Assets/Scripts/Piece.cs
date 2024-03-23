@@ -19,6 +19,11 @@ public class Piece : MonoBehaviour
         this.Spawn = Spawn;
     }
 
+    public void setSpawn(GameObject g)
+    {
+        Spawn = g;
+    }
+
     public void setIndex(int index)
     {
         this.index = index;
