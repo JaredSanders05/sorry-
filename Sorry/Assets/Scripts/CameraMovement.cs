@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
+    public GameObject pos1;
     public Vector3 targetPosition = new Vector3(1f, 2f, 3f); // Set your target position here
     public Vector3 targetEulerAngles = new Vector3(90f, 0f, 180f); // Set your target rotation here
     public float duration = 5f; // Duration in seconds over which the object will move
