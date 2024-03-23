@@ -666,9 +666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f451a70b5c8cc9f4c9499b0ac65811b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos1: {fileID: 0}
-  targetPosition: {x: -9.2, y: 12, z: 8.65}
-  targetEulerAngles: {x: 40, y: 90, z: 0}
+  pos1: {fileID: 1286120446}
   duration: 2
   conditionToCheck: 1
 --- !u!1 &1134861132
@@ -1163,8 +1161,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pos1: {fileID: 0}
-  targetPosition: {x: 1, y: 2, z: 3}
-  targetEulerAngles: {x: 90, y: 0, z: 180}
   duration: 5
   conditionToCheck: 0
 --- !u!1 &2054618940
