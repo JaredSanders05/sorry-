@@ -6,16 +6,17 @@ using UnityEngine.VFX;
 
 public class Piece : MonoBehaviour
 {
-    public GameObject Spawn; //set before game
+    public GameObject Spawn;
     public string color; //set before game
     public int index; 
 
 
     //Used to Initialize piece to gameboard
-    Piece (string color, int index)
+    Piece (string color, int index, GameObject Spawn)
     {
         this.color = color;
         this.index = index;
+        this.Spawn = Spawn;
     }
 
     public void setIndex(int index)
@@ -27,7 +28,7 @@ public class Piece : MonoBehaviour
     {
         return index;
     }
-    
+
 
     public void Move(Transform t)
     {

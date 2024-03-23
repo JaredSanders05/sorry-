@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: -5562685320388735685}
   m_Layer: 0
   m_Name: Yellow_Piece
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_TagString: Yellow
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -96,4 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace2c19e8082a5141af9e1915b2253db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spawn: {fileID: 0}
+  Spawn: {fileID: 2432121587845667315, guid: b45d2c8a0599fe04f8a9202a4ce5f48f, type: 3}
+  color: yellow
+  index: -1
