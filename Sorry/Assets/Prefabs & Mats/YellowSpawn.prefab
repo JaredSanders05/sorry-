@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8509256255803474623}
   m_Layer: 0
   m_Name: YellowSpawn
-  m_TagString: Untagged
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 2432121587845667315}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalPosition: {x: 4.89, y: 0, z: 14.84}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPiece: {fileID: 6903045506810700684, guid: 2243786febb4e3148819fdfb17ad4ded, type: 3}
-  startInddex: 0
+  startPos: {x: 4.9, y: 0, z: 17.28}
 --- !u!65 &8509256255803474623
 BoxCollider:
   m_ObjectHideFlags: 0

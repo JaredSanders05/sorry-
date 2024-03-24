@@ -40,10 +40,14 @@ public class Piece : MonoBehaviour
        //moves there
     }
 
+    public void kys()
+    {
+        Destroy(gameObject);
+    }
     public void die()
     {
-/*        Spawn.getScript.add();
-*/       //plays animation
-        Destroy(this);
+        //plays animation
+        Spawn.GetComponent<Spawn>().add();
+        Destroy(gameObject);
     }
 }

@@ -6,13 +6,14 @@ public class Spawn : MonoBehaviour
 {
     GameObject[] Pieces; //all pieces in spawn
     public GameObject startPiece; //add before game,set color bedore game and index = -1
-    public int startInddex; // index piece starts at
+    public Vector3 startPos; // index piece starts at
 
     void Start()
     {
         Pieces = new GameObject[4];
-        //initialize 4 piece objects into pieces
-        
+        //initialize 4 pieces to spawn
+        foreach (GameObject p in Pieces)
+            add();
     }
 
     public int getNumPieces()
@@ -21,7 +22,7 @@ public class Spawn : MonoBehaviour
 
         foreach (GameObject p in Pieces)
         {
-            if (p != null) { cnt++; }
+            if (p != null) cnt++;
         }
 
         return cnt;
@@ -29,33 +30,40 @@ public class Spawn : MonoBehaviour
 
     public void add()
     {
-        //adds piece to spawn
+        //adds piece to spawn   
         for (int i = 0; i < Pieces.Length; i++)
         {
             if (Pieces[i] == null)
             {
                 Pieces[i] = startPiece;
-                // Instantiate();
+                Pieces[i] = Instantiate(startPiece, this.transform, worldPositionStays: false);
+                switch (i)
+                { 
+                    case 0: Pieces[i].transform.position = transform.position + new Vector3(.5f, 0, .5f); break;
+                    case 1: Pieces[i].transform.position = transform.position + new Vector3(.5f, 0, -.5f); break;
+                    case 2: Pieces[i].transform.position = transform.position + new Vector3(-.5f, 0, -.5f); break;
+                    case 3: Pieces[i].transform.position = transform.position + new Vector3(-.5f, 0, .5f); break;
+                }
+                Pieces[i].transform.localScale = new Vector3(.5f, .5f, .5f);
                 break;
             }
         }
     }
     public void spawnPiece()
     {
-        //spawns (initializes) piece on gameboard at startIndex adn removes one from Peices
+        //spawns (initializes) piece on gameboard at startIndex and removes one from Peices
+
         for (int i = 0; i < Pieces.Length; i++)
         {
             if (Pieces[i] != null)
             {
-                Destroy(Pieces[i]);
+                Pieces[i].GetComponent<Piece>().kys();
                 Pieces[i] = null;
+                GameObject Piece = Instantiate(startPiece, startPos, Quaternion.identity);
+                Piece.GetComponent<Piece>().setSpawn(gameObject);
+                Piece.transform.localScale = new Vector3(1.5f,1.5f, 1.5f);
                 break;
             }
         }
-
-        Piece placedPiece = Instantiate(startPiece.GetComponent<Piece>(), new Vector3(0, 0, 0), Quaternion.identity) as Piece;
-        placedPiece.setIndex(startInddex);
-        placedPiece.setSpawn(gameObject);
-
     }
 }
