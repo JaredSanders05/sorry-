@@ -43,7 +43,7 @@ public class Box : MonoBehaviour
         return index;
     }
 
-    GameObject getPiece()
+    public GameObject getPiece()
     {
         return piece;
     }
