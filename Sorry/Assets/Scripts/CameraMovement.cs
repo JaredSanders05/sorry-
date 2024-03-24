@@ -48,6 +48,7 @@ public class CameraMovement : MonoBehaviour
         // Ensure the position is set to the target position after the duration
         transform.position = positions[cam].position;
         transform.rotation = positions[cam].rotation;
+        yield return new WaitForSeconds(2);
         changeCam(cam+1);
         isMoving = false;
     }
@@ -55,6 +56,8 @@ public class CameraMovement : MonoBehaviour
     {
         if(index >= positions.Count)
             cam = 0;
+        else if(index <0)
+            cam = positions.Count;
         else
             cam = index;
         StartCoroutine(Move());
