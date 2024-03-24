@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject BlueHome;
     public GameObject YellowHome;
     public GameObject GreenHome;
-    List<GameObject> boxes;
+    GameObject[] boxes;
 
     int i = 0;
     float unit = 1.234286f;
@@ -36,8 +36,34 @@ public class GameManager : MonoBehaviour
         YellowHome = Instantiate(YellowHome);
 
         //initialize boxes
-        boxes = new List<GameObject>();
-        Box = Instantiate(Box);
+        boxes = new GameObject[58];
+        for (i = 0; i < 15; i++)
+        {
+            boxes[i] = Instantiate(Box, new Vector3(unit * i, 0, 0), Quaternion.identity);
+            boxes[i].GetComponent<Box>().setType("white");
+            boxes[i].GetComponent<Box>().setIndex(i);
+        }
+
+        for (i = 0; i < 15; i++)
+        {
+            boxes[i+15] = Instantiate(Box, new Vector3(unit * 14, 0, unit * i), Quaternion.identity);
+            boxes[i+15].GetComponent<Box>().setType("white");
+            boxes[i + 15].GetComponent<Box>().setIndex(i);
+        }
+
+        for (i = 14; i >= 0; i--)
+        {
+            boxes[-i+14 + 30] = Instantiate(Box, new Vector3(unit * i, 0, unit * 14), Quaternion.identity);
+            boxes[-i+14 + 30].GetComponent<Box>().setType("white");
+            boxes[-i+14 + 30].GetComponent<Box>().setIndex(i);
+        }
+
+        for (i = 13; i >= 1; i--)
+        {
+            boxes[-i+13 + 45] = Instantiate(Box, new Vector3(0, 0, unit * i), Quaternion.identity);
+            boxes[-i+13 +45].GetComponent<Box>().setType("white");
+            boxes[-i + 13 + 45].GetComponent<Box>().setIndex(i);
+        }
     }
 
     // Update is called once per frame
@@ -45,12 +71,12 @@ public class GameManager : MonoBehaviour
     {
         i++;
 
-        if (i == 10)
+        if (i == 100)
         { 
-        RedSpawn.GetComponent<Spawn>().spawnPiece();
-        BlueSpawn.GetComponent<Spawn>().spawnPiece();
-        GreenSpawn.GetComponent<Spawn>().spawnPiece();
-        YellowSpawn.GetComponent<Spawn>().spawnPiece();
+            RedSpawn.GetComponent<Spawn>().spawnPiece();
+            BlueSpawn.GetComponent<Spawn>().spawnPiece();
+            GreenSpawn.GetComponent<Spawn>().spawnPiece();
+            YellowSpawn.GetComponent<Spawn>().spawnPiece();
         }
     }
 }

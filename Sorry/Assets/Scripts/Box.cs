@@ -15,6 +15,16 @@ public class Box : MonoBehaviour
         this.index = index;
     }
 
+    public void setType(string type)
+    {
+        this.type = type; 
+    }
+
+    public void setIndex(int index)
+    {
+        this.index=index;
+    }
+
     public void movePiece(Transform t)
     {
         piece.GetComponent<Piece>().Move(t);
