@@ -7,8 +7,8 @@ using UnityEngine.VFX;
 public class Piece : MonoBehaviour
 {
     public GameObject Spawn; //set before game
-    string color; //set before game
-    int index; 
+    public string color; //set before game
+    public int index; 
 
 
     //Used to Initialize piece to gameboard
