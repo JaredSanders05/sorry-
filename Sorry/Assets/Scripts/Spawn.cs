@@ -21,9 +21,8 @@ public class Spawn : MonoBehaviour
         int cnt = 0;
 
         foreach (GameObject p in Pieces)
-        {
-            if (p != null) cnt++;
-        }
+            if (p != null) 
+                cnt++;
 
         return cnt;
     }
@@ -35,7 +34,6 @@ public class Spawn : MonoBehaviour
         {
             if (Pieces[i] == null)
             {
-                Pieces[i] = startPiece;
                 Pieces[i] = Instantiate(startPiece, this.transform, worldPositionStays: false);
                 switch (i)
                 { 
