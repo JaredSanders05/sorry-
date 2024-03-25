@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Box : MonoBehaviour
 {
-    GameObject piece;
+    public GameObject piece;
     string type;
     int index;
 
@@ -13,6 +14,11 @@ public class Box : MonoBehaviour
         piece = null;
         this.type = type;
         this.index = index;
+    }
+
+    private void Start()
+    {
+        piece = null;
     }
 
     public bool hasPiece()
@@ -33,17 +39,6 @@ public class Box : MonoBehaviour
     public void movePiece(Transform t)
     {
         piece.GetComponent<Piece>().Move(t);
-    }
-
-    //piece is set by trigger commands, 
-    private void OnTriggerEnter(Collider other)
-    {
-        piece = other.gameObject;
-        piece.GetComponent<Piece>().setIndex(index);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
         piece = null;
     }
 
@@ -52,14 +47,34 @@ public class Box : MonoBehaviour
         return type;
     }
 
+    public GameObject getPiece()
+    {
+        return piece;
+    }
+
     //may never be used
     public int getIndex()
     {
         return index;
     }
 
-    public GameObject getPiece()
+    private void OnTriggerEnter(Collider other)
     {
-        return piece;
+        if (piece == null && other.gameObject.GetComponent<Piece>().getIndex() == index)
+            piece = other.gameObject;
+        else if (other.gameObject.GetComponent<Piece>().getIndex() == index)
+        {
+            piece.GetComponent<Piece>().die();
+            piece = other.gameObject;
+        }
+    }
+    public void setPieceIndex(int i)
+    {
+        piece.GetComponent<Piece>().setIndex(i);
+    }
+
+    public string getPieceColor()
+    {
+        return piece.GetComponent<Piece>().getColor();
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1448349325390227595}
   - component: {fileID: -7161770262909228678}
   - component: {fileID: 4341801787002424673}
-  - component: {fileID: 6620666434095537352}
+  - component: {fileID: 6289567194509872652}
   m_Layer: 0
   m_Name: Blue_Piece
   m_TagString: Blue
@@ -128,7 +128,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6620666434095537352
+--- !u!65 &6289567194509872652
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

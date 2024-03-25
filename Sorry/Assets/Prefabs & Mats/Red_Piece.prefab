@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5635940598036714885}
   - component: {fileID: 3115744177402930853}
   - component: {fileID: 6451160249090653682}
-  - component: {fileID: 8176352144749341561}
+  - component: {fileID: -8504820287248733807}
   m_Layer: 0
   m_Name: Red_Piece
   m_TagString: Red
@@ -128,7 +128,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &8176352144749341561
+--- !u!65 &-8504820287248733807
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

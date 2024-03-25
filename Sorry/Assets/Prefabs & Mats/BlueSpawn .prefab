@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPiece: {fileID: 3930183553815004901, guid: f0f58d6e9ca396143bb68621adce0e47, type: 3}
   startPos: {x: 0, y: 0, z: 4.9}
+  startIndex: 18
 --- !u!65 &5555735977224467091
 BoxCollider:
   m_ObjectHideFlags: 0
