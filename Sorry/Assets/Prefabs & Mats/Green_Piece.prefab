@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8388604571280751114}
   - component: {fileID: 3008088410218185058}
   - component: {fileID: -581401795347531460}
-  - component: {fileID: -2567616649838822315}
+  - component: {fileID: -630048340434076378}
   m_Layer: 0
   m_Name: Green_Piece
   m_TagString: Green
@@ -128,7 +128,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &-2567616649838822315
+--- !u!65 &-630048340434076378
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
