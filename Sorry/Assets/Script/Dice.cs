@@ -12,9 +12,8 @@ public class Dice : MonoBehaviour
     private float forceX, forceY, forceZ;
     public float numFaceUp = -1;
     public bool hadRoll, touchDown;
-    private float initY; 
-    SortedDictionary<float, float> sd;
-   
+    private float initY;
+    public int click=0;   
     
 
     void Awake()
@@ -30,8 +29,9 @@ public class Dice : MonoBehaviour
     {
         if (rb != null)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && click==0)
             {
+                click=1;
                 rollDice();
             }
        
