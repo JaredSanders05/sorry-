@@ -12,16 +12,17 @@ public class moveDice : MonoBehaviour
     void Awake()
     {
         d = FindObjectOfType<Dice>();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (d != null)
+        if (d != null && tmp!=null)
         {
             if (d.numFaceUp != -1)
             {
-                tmp.text = d.numFaceUp.ToString();
+                tmp.text = "Number Rolled:" + d.numFaceUp.ToString();
             }
         }
     }

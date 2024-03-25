@@ -5,7 +5,7 @@ using UnityEngine;
 public class checkFaceUp : MonoBehaviour
 {
     Dice d;
-    void Awake() {
+    void Start() {
         d = FindObjectOfType<Dice>();
     }
     private void OnTriggerStay(Collider other)
