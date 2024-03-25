@@ -11,7 +11,7 @@ public class Piece : MonoBehaviour
     public string color; //set before game
     public int index;
     private Transform target;
-    private float speed = 6f;
+    private float speed = 9f;
    
     public void setSpawn(GameObject g)
     {

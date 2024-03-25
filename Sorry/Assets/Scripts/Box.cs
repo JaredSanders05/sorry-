@@ -9,10 +9,23 @@ public class Box : MonoBehaviour
     public string color;
     public int index;
 
+    GameObject corner1;
+    GameObject corner2;
+    GameObject corner3;
+    GameObject corner4;
 
     private void Start()
     {
         piece = null;
+        corner1 = new GameObject();
+        corner2 = new GameObject();
+        corner3 = new GameObject();
+        corner4 = new GameObject();
+
+        corner1.transform.position = new Vector3(0,0,0);
+        corner2.transform.position = new Vector3(0,0, 17.28f);  
+        corner3.transform.position = new Vector3(17.28f, 0, 17.28f);
+        corner4.transform.position = new Vector3(17.28f, 0 ,0);
     }
 
     public bool hasPiece()
@@ -32,7 +45,39 @@ public class Box : MonoBehaviour
 
     public void movePiece(GameObject b)
     {
+        StartCoroutine(wait(.5f,b));
+    }
+
+    private IEnumerator wait(float waitTime, GameObject b)
+    {
         piece.GetComponent<Piece>().setIndex(b.GetComponent<Box>().getIndex());
+
+        int i = b.GetComponent<Box>().getIndex();
+        if ((i > 0 && i < 14) && (index < 56 && index > 42))
+        {
+            // Debug.Log("corner1");
+            piece.GetComponent<Piece>().Move(corner1.transform);
+            yield return new WaitForSeconds(waitTime);
+        }
+        else if (i > 14 && index < 14)
+        {
+            // Debug.Log("corner2");
+            piece.GetComponent<Piece>().Move(corner2.transform);
+            yield return new WaitForSeconds(waitTime);
+        }
+        else if (i > 28 && index < 28)
+        {
+            // Debug.Log("corner3");
+            piece.GetComponent<Piece>().Move(corner3.transform);
+            yield return new WaitForSeconds(waitTime);
+        }
+        else if (i > 42 && index < 42)
+        {
+            // Debug.Log("corner4");
+            piece.GetComponent<Piece>().Move(corner4.transform);
+            yield return new WaitForSeconds(waitTime);
+        }
+
         piece.GetComponent<Piece>().Move(b.transform);
         piece = null;
     }
