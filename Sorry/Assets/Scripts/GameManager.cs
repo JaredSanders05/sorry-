@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
             BlueSpawn.GetComponent<Spawn>().spawnPiece();
             GreenSpawn.GetComponent<Spawn>().spawnPiece();
             YellowSpawn.GetComponent<Spawn>().spawnPiece();
-            StartCoroutine( movePieces(2f) );
+            StartCoroutine( movePieces(1f) );
         }
     }
 
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
             if (!boxes[nextBoxIndex].GetComponent<Box>().getColor().Equals(currentColor) && !boxes[nextBoxIndex].GetComponent<Box>().getColor().Equals("white"))
             {
                 boxes[randBoxIndex].GetComponent<Box>().movePiece(boxes[nextBoxIndex]);
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(1f);
                 boxes[nextBoxIndex].GetComponent<Box>().movePiece(boxes[nextBoxIndex+1]);
                 yield return new WaitForSeconds(.5f);
                 boxes[nextBoxIndex+1].GetComponent<Box>().movePiece(boxes[nextBoxIndex+2]);
