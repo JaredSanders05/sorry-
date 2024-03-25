@@ -33,25 +33,21 @@ public class GameManager : MonoBehaviour
             if (i <= 14)
             {
                 boxes[i] = Instantiate(Box, new Vector3(0, 0, unit * i), Quaternion.identity);
-                boxes[i].GetComponent<Box>().setType("white");
                 boxes[i].GetComponent<Box>().setIndex(i);
             }
             else if (i <= 28)
             {
                 boxes[i] = Instantiate(Box, new Vector3(unit*(i-14), 0, unit * 14), Quaternion.identity);
-                boxes[i].GetComponent<Box>().setType("white");
                 boxes[i].GetComponent<Box>().setIndex(i);
             }
             else if (i <= 41)
             {
                 boxes[i] = Instantiate(Box, new Vector3(unit * 14, 0, unit*(-i+42)), Quaternion.identity);
-                boxes[i].GetComponent<Box>().setType("white");
                 boxes[i].GetComponent<Box>().setIndex(i);
             }
             else if (i <= 55)
             {
                 boxes[i] = Instantiate(Box, new Vector3(unit*(-i+56), 0, 0), Quaternion.identity);
-                boxes[i].GetComponent<Box>().setType("white");
                 boxes[i].GetComponent<Box>().setIndex(i);
             }
         }
@@ -60,7 +56,14 @@ public class GameManager : MonoBehaviour
         GreenSpawn.GetComponent<Spawn>().setBox(boxes[32]);
         YellowSpawn.GetComponent<Spawn>().setBox(boxes[18]);
         BlueSpawn.GetComponent<Spawn>().setBox(boxes[4]);
-
+        boxes[1].GetComponent<Box>().setColor("blue");
+        boxes[9].GetComponent<Box>().setColor("blue");
+        boxes[15].GetComponent<Box>().setColor("yellow");
+        boxes[23].GetComponent<Box>().setColor("yellow");
+        boxes[29].GetComponent<Box>().setColor("green");
+        boxes[37].GetComponent<Box>().setColor("green");
+        boxes[43].GetComponent<Box>().setColor("red");
+        boxes[51].GetComponent<Box>().setColor("red");
 
         RedSpawn = Instantiate(RedSpawn);
         GreenSpawn = Instantiate(GreenSpawn);
@@ -95,6 +98,7 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(waitTime);
 
+            //list off index all boxes with a piece
             List<int> list = new List<int>();
             foreach (GameObject B in boxes)
             {
@@ -105,12 +109,27 @@ public class GameManager : MonoBehaviour
             }
 
             //picks random box that has a peice
-            int randIndex = list[Random.Range(0, list.Count)];
-            int move = randIndex + Random.Range(1, 7);
-            if (move >= 56)
-                move %= 56;
-            boxes[randIndex].GetComponent<Box>().setPieceIndex(move);
-            boxes[randIndex].GetComponent<Box>().movePiece(boxes[move].transform);
+            int randBoxIndex = list[Random.Range(0, list.Count)];
+            string currentColor = boxes[randBoxIndex].GetComponent<Box>().getPieceColor();
+            int nextBoxIndex = randBoxIndex + Random.Range(1, 7);
+            if (nextBoxIndex >= 56) //make sure index not out of bounds
+                nextBoxIndex %= 56;
+
+            //check enter box
+            //
+            //check box color for slide
+            if (!boxes[nextBoxIndex].GetComponent<Box>().getColor().Equals(currentColor) && !boxes[nextBoxIndex].GetComponent<Box>().getColor().Equals("white"))
+            {
+                boxes[randBoxIndex].GetComponent<Box>().movePiece(boxes[nextBoxIndex]);
+                yield return new WaitForSeconds(1.5f);
+                boxes[nextBoxIndex].GetComponent<Box>().movePiece(boxes[nextBoxIndex+1]);
+                yield return new WaitForSeconds(.5f);
+                boxes[nextBoxIndex+1].GetComponent<Box>().movePiece(boxes[nextBoxIndex+2]);
+                yield return new WaitForSeconds(.5f);
+                boxes[nextBoxIndex+2].GetComponent<Box>().movePiece(boxes[nextBoxIndex+3]);
+            }
+            else 
+                boxes[randBoxIndex].GetComponent<Box>().movePiece(boxes[nextBoxIndex]);
         }
     }
 }

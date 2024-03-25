@@ -6,15 +6,9 @@ using UnityEngine;
 public class Box : MonoBehaviour
 {
     public GameObject piece;
-    string type;
-    int index;
+    public string color;
+    public int index;
 
-    Box(string type, int index)
-    {
-        piece = null;
-        this.type = type;
-        this.index = index;
-    }
 
     private void Start()
     {
@@ -26,9 +20,9 @@ public class Box : MonoBehaviour
         return piece != null;
     }
 
-    public void setType(string type)
+    public void setColor(string color)
     {
-        this.type = type; 
+        this.color = color; 
     }
 
     public void setIndex(int index)
@@ -36,15 +30,16 @@ public class Box : MonoBehaviour
         this.index=index;
     }
 
-    public void movePiece(Transform t)
+    public void movePiece(GameObject b)
     {
-        piece.GetComponent<Piece>().Move(t);
+        piece.GetComponent<Piece>().setIndex(b.GetComponent<Box>().getIndex());
+        piece.GetComponent<Piece>().Move(b.transform);
         piece = null;
     }
 
-    public string getType()
+    public string getColor()
     { 
-        return type;
+        return color;
     }
 
     public GameObject getPiece()
