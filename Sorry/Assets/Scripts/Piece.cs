@@ -29,7 +29,7 @@ public class Piece : MonoBehaviour
         this.index = index;
     }
 
-    public int getIndex(int index)
+    public int getIndex()
     {
         return index;
     }

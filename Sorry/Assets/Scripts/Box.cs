@@ -15,6 +15,11 @@ public class Box : MonoBehaviour
         this.index = index;
     }
 
+    public bool hasPiece()
+    {
+        return piece != null;
+    }
+
     public void setType(string type)
     {
         this.type = type; 

@@ -36,33 +36,33 @@ public class GameManager : MonoBehaviour
         YellowHome = Instantiate(YellowHome);
 
         //initialize boxes
-        boxes = new GameObject[58];
-        for (i = 0; i < 15; i++)
+        boxes = new GameObject[56];
+        for (i = 0; i < 56; i++)
         {
-            boxes[i] = Instantiate(Box, new Vector3(unit * i, 0, 0), Quaternion.identity);
-            boxes[i].GetComponent<Box>().setType("white");
-            boxes[i].GetComponent<Box>().setIndex(i);
-        }
-
-        for (i = 0; i < 15; i++)
-        {
-            boxes[i+15] = Instantiate(Box, new Vector3(unit * 14, 0, unit * i), Quaternion.identity);
-            boxes[i+15].GetComponent<Box>().setType("white");
-            boxes[i + 15].GetComponent<Box>().setIndex(i);
-        }
-
-        for (i = 14; i >= 0; i--)
-        {
-            boxes[-i+14 + 30] = Instantiate(Box, new Vector3(unit * i, 0, unit * 14), Quaternion.identity);
-            boxes[-i+14 + 30].GetComponent<Box>().setType("white");
-            boxes[-i+14 + 30].GetComponent<Box>().setIndex(i);
-        }
-
-        for (i = 13; i >= 1; i--)
-        {
-            boxes[-i+13 + 45] = Instantiate(Box, new Vector3(0, 0, unit * i), Quaternion.identity);
-            boxes[-i+13 +45].GetComponent<Box>().setType("white");
-            boxes[-i + 13 + 45].GetComponent<Box>().setIndex(i);
+            if (i <= 14)
+            {
+                boxes[i] = Instantiate(Box, new Vector3(0, 0, unit * i), Quaternion.identity);
+                boxes[i].GetComponent<Box>().setType("white");
+                boxes[i].GetComponent<Box>().setIndex(i);
+            }
+            else if (i <= 28)
+            {
+                boxes[i] = Instantiate(Box, new Vector3(unit*(i-14), 0, unit * 14), Quaternion.identity);
+                boxes[i].GetComponent<Box>().setType("white");
+                boxes[i].GetComponent<Box>().setIndex(i);
+            }
+            else if (i <= 41)
+            {
+                boxes[i] = Instantiate(Box, new Vector3(unit * 14, 0, unit*(-i+42)), Quaternion.identity);
+                boxes[i].GetComponent<Box>().setType("white");
+                boxes[i].GetComponent<Box>().setIndex(i);
+            }
+            else if (i <= 55)
+            {
+                boxes[i] = Instantiate(Box, new Vector3(unit*(-i+56), 0, 0), Quaternion.identity);
+                boxes[i].GetComponent<Box>().setType("white");
+                boxes[i].GetComponent<Box>().setIndex(i);
+            }
         }
     }
 
@@ -72,11 +72,24 @@ public class GameManager : MonoBehaviour
         i++;
 
         if (i == 100)
-        { 
+        {
             RedSpawn.GetComponent<Spawn>().spawnPiece();
             BlueSpawn.GetComponent<Spawn>().spawnPiece();
             GreenSpawn.GetComponent<Spawn>().spawnPiece();
-            YellowSpawn.GetComponent<Spawn>().spawnPiece();
+            YellowSpawn.GetComponent<Spawn>().spawnPiece();   
+        }
+
+        if (i%200 == 0)
+        {
+            foreach (GameObject B in boxes)
+            {
+                if (B.GetComponent<Box>().hasPiece())
+                {
+                    Debug.Log(B.GetComponent<Box>().getIndex());
+                }
+            }
+
+            Debug.Log("------");
         }
     }
 }
