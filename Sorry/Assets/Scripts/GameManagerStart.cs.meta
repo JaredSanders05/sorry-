@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: ac788433e916a8a42ab2a5d5b1cecfd3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Box: {fileID: 3595522239412767711, guid: 5653b637e38177c438d197c13fdbc398, type: 3}
+  - RedSpawn: {instanceID: 0}
+  - GreenSpawn: {instanceID: 0}
+  - YellowSpawn: {instanceID: 0}
+  - BlueSpawn: {instanceID: 0}
+  - RedHome: {instanceID: 0}
+  - BlueHome: {instanceID: 0}
+  - YellowHome: {instanceID: 0}
+  - GreenHome: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
