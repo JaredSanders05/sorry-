@@ -168,6 +168,8 @@ public class GameManager : MonoBehaviour
 
         while (true)
         {
+            Debug.Log(turns[turn]);
+
             yield return rollDice();
 
             switch (turns[turn])
