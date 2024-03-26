@@ -46,7 +46,6 @@ public class CameraMovement : MonoBehaviour
         // Ensure the position is set to the target position after the duration
         transform.position = positions[cam].position;
         transform.rotation = positions[cam].rotation;
-        yield return new WaitForSeconds(2);
 /*        changeCam(cam+1); */
     }
     public void changeCam(int index)
