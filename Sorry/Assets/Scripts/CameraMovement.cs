@@ -9,7 +9,6 @@ public class CameraMovement : MonoBehaviour
     public float duration = 5f; // Duration in seconds over which the object will move
     public bool conditionToCheck = true; // Runs this script if move is true
 
-    private bool isMoving = false;
     void Start()
     {
         foreach (GameObject go in GameObject.FindGameObjectsWithTag("Camera"))
@@ -21,10 +20,10 @@ public class CameraMovement : MonoBehaviour
         //     Debug.Log(x);
         // }
         // Debug.Log("");
-        if(conditionToCheck && !isMoving)
+      /*  if(conditionToCheck && !isMoving)
         {
             StartCoroutine(Move());
-        }
+        }*/
     }
     void Update()
     {
@@ -32,7 +31,6 @@ public class CameraMovement : MonoBehaviour
     }
     IEnumerator Move()
     {
-        isMoving = true;
         Vector3 startPosition = transform.position; // Store the starting position
         Quaternion startRotation = transform.rotation; // Store the starting rotation
         float time = 0;
@@ -49,8 +47,7 @@ public class CameraMovement : MonoBehaviour
         transform.position = positions[cam].position;
         transform.rotation = positions[cam].rotation;
         yield return new WaitForSeconds(2);
-        changeCam(cam+1);
-        isMoving = false;
+/*        changeCam(cam+1); */
     }
     public void changeCam(int index)
     {

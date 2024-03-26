@@ -8,6 +8,8 @@ TagManager:
   - Green
   - Red
   - Yellow
+  - Camera
+  - Dice
   layers:
   - Default
   - TransparentFX

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8509256255803474623}
   m_Layer: 0
   m_Name: YellowSpawn
-  m_TagString: Yellow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,8 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPiece: {fileID: 6903045506810700684, guid: 2243786febb4e3148819fdfb17ad4ded, type: 3}
-  startPos: {x: 4.9, y: 0, z: 17.28}
-  startIndex: 32
+  Box: {fileID: 0}
 --- !u!65 &8509256255803474623
 BoxCollider:
   m_ObjectHideFlags: 0

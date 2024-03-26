@@ -13,14 +13,24 @@ public class Dice : MonoBehaviour
     public float numFaceUp = -1;
     public bool hadRoll, touchDown;
     private float initY;
-    public int click=0;   
-    
+    public int click=0;
+    private bool hoverClick;
+
+    void OnMouseDown()
+    {
+        /*Do your stuff here*/
+        if (Input.GetMouseButtonDown(0))
+        {
+            hoverClick = true;
+        }
+    }
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         touchDown = false;
         hadRoll = false;
+        hoverClick = false;
         initY = rb.transform.position.y;
 
     }
@@ -29,17 +39,22 @@ public class Dice : MonoBehaviour
     {
         if (rb != null)
         {
-            if (Input.GetMouseButtonDown(0) && click==0)
+            if (hoverClick && click==0)
             {
                 click=1;
                 rollDice();
+                hoverClick = false;
             }
-       
-            
         }
-        else {
+        else
+        {
             Debug.Log("Dice is null!");
         }
+    }
+
+    public float getNumFaceUp()
+    {
+        return numFaceUp;
     }
 
     private void rollDice() {

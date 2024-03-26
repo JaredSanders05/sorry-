@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5555735977224467091}
   m_Layer: 0
   m_Name: 'BlueSpawn '
-  m_TagString: Blue
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,8 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPiece: {fileID: 3930183553815004901, guid: f0f58d6e9ca396143bb68621adce0e47, type: 3}
-  startPos: {x: 0, y: 0, z: 4.9}
-  startIndex: 18
+  Box: {fileID: 0}
 --- !u!65 &5555735977224467091
 BoxCollider:
   m_ObjectHideFlags: 0

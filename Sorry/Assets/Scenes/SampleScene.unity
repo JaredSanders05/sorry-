@@ -645,6 +645,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dice
       objectReference: {fileID: 0}
+    - target: {fileID: 6801955793903224657, guid: 0d2b9188252a78b4298fb8e34d9229ee, type: 3}
+      propertyPath: m_TagString
+      value: Dice
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -3083,6 +3087,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Box: {fileID: 3595522239412767711, guid: 5653b637e38177c438d197c13fdbc398, type: 3}
+  Camera: {fileID: 1035188311}
+  Dice: {fileID: 1767511923}
   RedSpawn: {fileID: 439216151203974475, guid: cb5c9b44aaaeebb4082e0918608cab89, type: 3}
   GreenSpawn: {fileID: 2030141694715748758, guid: ed6b377697e313a44a12da4db8d77a9a, type: 3}
   YellowSpawn: {fileID: 2432121587845667315, guid: b45d2c8a0599fe04f8a9202a4ce5f48f, type: 3}

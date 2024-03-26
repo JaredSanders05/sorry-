@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1008531519507171018}
   m_Layer: 0
   m_Name: RedSpawn
-  m_TagString: Red
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,8 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPiece: {fileID: 1075169414184308844, guid: 08fcc399d639d404489313aeccf0dc27, type: 3}
-  startPos: {x: 12.3, y: 0, z: 0}
-  startIndex: 4
+  Box: {fileID: 0}
 --- !u!65 &1008531519507171018
 BoxCollider:
   m_ObjectHideFlags: 0
