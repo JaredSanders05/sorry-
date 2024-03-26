@@ -15,7 +15,11 @@ public class Spawn : MonoBehaviour
             add();
     }
 
-    public int getNumPieces()
+    public bool isEmpty()
+    {
+        return getNumPieces() == 0;
+    }
+    int getNumPieces()
     {
         int cnt = 0;
 

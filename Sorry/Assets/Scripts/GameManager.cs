@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        turns = new List<string> {"blue", "yellow", "green", "red"};
+        turns = new List<string> {"Blue", "Yellow", "Green", "Red"};
 
         //initialize boxes
         boxes = new GameObject[56];
@@ -102,14 +102,14 @@ public class GameManager : MonoBehaviour
         //call correct rotation
         switch (turn)
         {
-            case "yellow" : Camera.GetComponent<CameraMovement>().changeCam(1); break;
-            case "blue": Camera.GetComponent<CameraMovement>().changeCam(0); break;
-            case "red": Camera.GetComponent<CameraMovement>().changeCam(3); break;
-            case "green": Camera.GetComponent<CameraMovement>().changeCam(2); break;
+            case "Yellow" : Camera.GetComponent<CameraMovement>().changeCam(1); break;
+            case "Blue": Camera.GetComponent<CameraMovement>().changeCam(0); break;
+            case "Red": Camera.GetComponent<CameraMovement>().changeCam(3); break;
+            case "Green": Camera.GetComponent<CameraMovement>().changeCam(2); break;
         }
         while (Dice.GetComponent<Dice>().getNumFaceUp() == -1)
         {
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(.1f);
         }
         
         diceNum = Dice.GetComponent<Dice>().getNumFaceUp();
@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
     }
 
     //run till peice selected or spawned
-    private IEnumerator selectPiece(GameObject[] pieces, GameObject Spawn) 
+    private IEnumerator selectPiece(GameObject Spawn, string turn) 
     {
         //can select or spawn a peice
         //only can spawn piece if you rolled a 1 or 2
@@ -188,10 +188,10 @@ public class GameManager : MonoBehaviour
             Debug.Log(turns[turn] + "'s turn");
             switch (turns[turn])
             {
-                case "blue": yield return camBlue(); break;
-                case "yellow": yield return camYellow(); break;
-                case "green": yield return camGreen(); break;
-                case "red": yield return camRed(); break;
+                case "Blue": yield return camBlue(); break;
+                case "Yellow": yield return camYellow(); break;
+                case "Green": yield return camGreen(); break;
+                case "Red": yield return camRed(); break;
             }
 
             Debug.Log("Wait for Dice Roll");
@@ -199,52 +199,52 @@ public class GameManager : MonoBehaviour
 
             switch (turns[turn])
             {
-                case "blue":
+                case "Blue":
 
                     //find all gameobject with tag of the turn's color
                         //if none come up you need a 1 or 2 to spawn a piece
                         //if some come up you can either select a piece or spawn a piece
                     Debug.Log("Wait for Piece Select");
-                    yield return selectPiece(GameObject.FindGameObjectsWithTag("Blue"), BlueSpawn);
+                    yield return selectPiece(BlueSpawn, turns[turn]);
                     yield return camBlue();
                     //if not spawned
                         yield return move(turns[turn]);
 
                     break;
 
-                case "yellow":
+                case "Yellow":
 
                     //find all gameobject with tag of the turn's color
                         //if none come up you need a 1 or 2 to spawn a piece
                         //if some come up you can either select a piece or spawn a piece
                     Debug.Log("Wait for Piece Select");
-                    yield return selectPiece(GameObject.FindGameObjectsWithTag("Yellow"), YellowSpawn);
+                    yield return selectPiece(YellowSpawn, turns[turn]);
                     yield return camYellow();
                     //if not spawned
                         yield return move(turns[turn]);
 
                     break;
 
-                case "green":
+                case "Green":
 
                     //find all gameobject with tag of the turn's color
                         //if none come up you need a 1 or 2 to spawn a piece
                         //if some come up you can either select a piece or spawn a piece
                     Debug.Log("Wait for Piece Select");
-                    yield return selectPiece(GameObject.FindGameObjectsWithTag("Green"), GreenSpawn);
+                    yield return selectPiece(GreenSpawn, turns[turn]);
                     yield return camGreen();
                     //if not spawned
                         yield return move(turns[turn]);
 
                     break;
 
-                case "red":
+                case "Red":
 
                     //find all gameobject with tag of the turn's color
                         //if none come up you need a 1 or 2 to spawn a piece
                         //if some come up you can either select a piece or spawn a piece
                     Debug.Log("Wait for Piece Select");
-                    yield return selectPiece(GameObject.FindGameObjectsWithTag("Red"), RedSpawn);
+                    yield return selectPiece(RedSpawn, turns[turn]);
                     //if not spawned
                     yield return camRed();
                         yield return move(turns[turn]);

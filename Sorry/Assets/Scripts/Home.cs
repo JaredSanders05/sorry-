@@ -25,6 +25,7 @@ public class Home : MonoBehaviour
             {
                 Pieces[i] = Instantiate(startPiece, this.transform, worldPositionStays: false);
                 Pieces[i].GetComponent<BoxCollider>().enabled = false;
+                Pieces[i].tag = "Untagged";
                 switch (i)
                 {
                     case 0: Pieces[i].transform.position = transform.position + new Vector3(.5f, 0, .5f); break;
@@ -33,6 +34,7 @@ public class Home : MonoBehaviour
                     case 3: Pieces[i].transform.position = transform.position + new Vector3(-.5f, 0, .5f); break;
                 }
                 Pieces[i].transform.localScale = new Vector3(.7f, .7f, .7f);
+
                 break;
             }
         }
