@@ -22,7 +22,7 @@ public class moveDice : MonoBehaviour
         {
             if (d.numFaceUp != -1)
             {
-                tmp.text = "Number Rolled:" + d.numFaceUp.ToString();
+                tmp.text = "Dice: " + d.numFaceUp.ToString();
             }
         }
     }

@@ -14,7 +14,7 @@ public class Piece : MonoBehaviour
     private float speed = 9f;
    
     public void setSpawn(GameObject g)
-    {
+    {           
         Spawn = g;
     }
 

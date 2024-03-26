@@ -9,23 +9,14 @@ public class Box : MonoBehaviour
     public string color;
     public int index;
 
-    GameObject corner1;
-    GameObject corner2;
-    GameObject corner3;
-    GameObject corner4;
+    public GameObject corner1;
+    public GameObject corner2;
+    public GameObject corner3;
+    public GameObject corner4;
 
     private void Start()
     {
         piece = null;
-        corner1 = new GameObject();
-        corner2 = new GameObject();
-        corner3 = new GameObject();
-        corner4 = new GameObject();
-
-        corner1.transform.position = new Vector3(0,0,0);
-        corner2.transform.position = new Vector3(0,0, 17.28f);  
-        corner3.transform.position = new Vector3(17.28f, 0, 17.28f);
-        corner4.transform.position = new Vector3(17.28f, 0 ,0);
     }
 
     public bool hasPiece()

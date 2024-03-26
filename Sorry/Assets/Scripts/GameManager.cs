@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject BlueHome;
     public GameObject YellowHome;
     public GameObject GreenHome;
+    public GameObject pointLight;
     GameObject[] boxes;
 
     List<string> turns;

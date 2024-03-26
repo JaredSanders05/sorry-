@@ -68,3 +68,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   piece: {fileID: 0}
   color: white
+  index: 0
+  corner1: {fileID: 9052564208247274473, guid: 6eb1968bf7371374ba73469818bc9c39, type: 3}
+  corner2: {fileID: 4541952734701252343, guid: 6b3601d6f330a6b48b7fb62d3afdf20c, type: 3}
+  corner3: {fileID: 8671379398040358443, guid: 6a8f9ab1515d3834ea847a223c74fc0b, type: 3}
+  corner4: {fileID: 1143925803225283208, guid: e9be8a94e8d48c94bac4279f17fb8ad7, type: 3}

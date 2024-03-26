@@ -62,7 +62,8 @@ public class Spawn : MonoBehaviour
                 Pieces[i] = null;
                 GameObject Piece = Instantiate(startPiece, Box.transform.position, Quaternion.identity);
                 Piece.GetComponent<Piece>().setSpawn(gameObject);
-                Piece.transform.localScale = new Vector3(1.5f,1.5f, 1.5f);
+/*                Piece.transform.position = new Vector3(Piece.transform.position.x, 30, Piece.transform.position.z);
+*/                Piece.transform.localScale = new Vector3(1.5f,1.5f, 1.5f);
                 Piece.GetComponent<Piece>().setIndex(Box.GetComponent<Box>().getIndex());
                 break;
             }
