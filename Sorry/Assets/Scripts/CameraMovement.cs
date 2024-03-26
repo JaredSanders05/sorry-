@@ -9,21 +9,35 @@ public class CameraMovement : MonoBehaviour
     public float duration = 5f; // Duration in seconds over which the object will move
     public bool conditionToCheck = true; // Runs this script if move is true
 
+    public GameObject MainCam1;
+    public GameObject MainCam2;
+    public GameObject MainCam3;
+    public GameObject MainCam4;
+    public GameObject BlueCam;
+    public GameObject YellowCam;
+    public GameObject GreenCam;
+    public GameObject RedCam;
+
     void Start()
-    {
-        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Camera"))
-        {
-            positions.Add(go.GetComponent<Transform>());
-        }
+    {   
+        positions.Add(MainCam1.GetComponent<Transform>());
+        positions.Add(MainCam2.GetComponent<Transform>());
+        positions.Add(MainCam3.GetComponent<Transform>());
+        positions.Add(MainCam4.GetComponent<Transform>());
+        positions.Add(BlueCam.GetComponent<Transform>());
+        positions.Add(YellowCam.GetComponent<Transform>());
+        positions.Add(GreenCam.GetComponent<Transform>());
+        positions.Add(RedCam.GetComponent<Transform>());
+
         // foreach(var x in positions)
         // {
         //     Debug.Log(x);
         // }
         // Debug.Log("");
-      /*  if(conditionToCheck && !isMoving)
-        {
-            StartCoroutine(Move());
-        }*/
+        /*  if(conditionToCheck && !isMoving)
+          {
+              StartCoroutine(Move());
+          }*/
     }
     void Update()
     {

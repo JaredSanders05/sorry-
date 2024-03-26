@@ -2278,6 +2278,14 @@ MonoBehaviour:
   cam: 0
   duration: 2
   conditionToCheck: 1
+  MainCam1: {fileID: 933986988}
+  MainCam2: {fileID: 1447636164}
+  MainCam3: {fileID: 1370181644}
+  MainCam4: {fileID: 1654736457}
+  BlueCam: {fileID: 376418246}
+  YellowCam: {fileID: 2011565519}
+  GreenCam: {fileID: 285659998}
+  RedCam: {fileID: 351773449}
 --- !u!20 &1035188311
 Camera:
   m_ObjectHideFlags: 0

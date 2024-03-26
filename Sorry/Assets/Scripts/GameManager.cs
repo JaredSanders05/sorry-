@@ -96,14 +96,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //wait till dice has been rolled
     private IEnumerator rollDice(string turn)
     {
         //call correct rotation
         switch (turn)
         {
-            case "yellow" : Camera.GetComponent<CameraMovement>().changeCam(6); break;
+            case "yellow" : Camera.GetComponent<CameraMovement>().changeCam(1); break;
             case "blue": Camera.GetComponent<CameraMovement>().changeCam(0); break;
-            case "red": Camera.GetComponent<CameraMovement>().changeCam(1); break;
+            case "red": Camera.GetComponent<CameraMovement>().changeCam(3); break;
             case "green": Camera.GetComponent<CameraMovement>().changeCam(2); break;
         }
         yield return new WaitForSeconds(3f);
@@ -111,35 +112,39 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator camBlue()
     {
-        Camera.GetComponent<CameraMovement>().changeCam(5);
+        Camera.GetComponent<CameraMovement>().changeCam(4);
         yield return new WaitForSeconds(3f);
     }
 
     private IEnumerator camYellow()
     {
-        Camera.GetComponent<CameraMovement>().changeCam(7);
+        Camera.GetComponent<CameraMovement>().changeCam(5);
         yield return new WaitForSeconds(3f);
     }
 
     private IEnumerator camRed()
     {
-        Camera.GetComponent<CameraMovement>().changeCam(4);
+        Camera.GetComponent<CameraMovement>().changeCam(7);
         yield return new WaitForSeconds(3f);
     }
 
     private IEnumerator camGreen()
     {
-        Camera.GetComponent<CameraMovement>().changeCam(3);
+        Camera.GetComponent<CameraMovement>().changeCam(6);
         yield return new WaitForSeconds(3f);
     }
 
+    //run till peice selected or spawned
     private IEnumerator selectPiece(GameObject[] pieces, GameObject Spawn) 
     {
         //can select or spawn a peice
         //only can spawn piece if you rolled a 1 or 2
-        return null;
+
+
+        yield return new WaitForSeconds(1f);
     }
 
+    //run till move done
     private IEnumerator move(string turn)
     {
         //checks if current block is safezone entry
@@ -174,8 +179,7 @@ public class GameManager : MonoBehaviour
 
         while (true)
         {
-            Debug.Log(turns[turn]);
-
+            Debug.Log(turns[turn] + "'s turn");
             switch (turns[turn])
             {
                 case "blue": yield return camBlue(); break;
@@ -184,55 +188,60 @@ public class GameManager : MonoBehaviour
                 case "red": yield return camRed(); break;
             }
 
+            Debug.Log("Wait for Dice Roll");
             yield return rollDice(turns[turn]);
 
             switch (turns[turn])
             {
-                case "blue": 
+                case "blue":
 
                     //find all gameobject with tag of the turn's color
                         //if none come up you need a 1 or 2 to spawn a piece
                         //if some come up you can either select a piece or spawn a piece
+                    Debug.Log("Wait for Piece Select");
                     yield return selectPiece(GameObject.FindGameObjectsWithTag("Blue"), BlueSpawn);
-                    //go to turn's cam and move selected piece
                     yield return camBlue();
-                    yield return move(turns[turn]);
+                    //if not spawned
+                        yield return move(turns[turn]);
 
                     break;
 
                 case "yellow":
 
                     //find all gameobject with tag of the turn's color
-                    //if none come up you need a 1 or 2 to spawn a piece
-                    //if some come up you can either select a piece or spawn a piece
+                        //if none come up you need a 1 or 2 to spawn a piece
+                        //if some come up you can either select a piece or spawn a piece
+                    Debug.Log("Wait for Piece Select");
                     yield return selectPiece(GameObject.FindGameObjectsWithTag("Yellow"), YellowSpawn);
-                    //go to turn's cam and move selected piece
                     yield return camYellow();
-                    yield return move(turns[turn]);
+                    //if not spawned
+                        yield return move(turns[turn]);
 
                     break;
 
                 case "green":
 
                     //find all gameobject with tag of the turn's color
-                    //if none come up you need a 1 or 2 to spawn a piece
-                    //if some come up you can either select a piece or spawn a piece
+                        //if none come up you need a 1 or 2 to spawn a piece
+                        //if some come up you can either select a piece or spawn a piece
+                    Debug.Log("Wait for Piece Select");
                     yield return selectPiece(GameObject.FindGameObjectsWithTag("Green"), GreenSpawn);
-                    //go to turn's cam and move selected piece
                     yield return camGreen();
-                    yield return move(turns[turn]);
+                    //if not spawned
+                        yield return move(turns[turn]);
 
                     break;
 
                 case "red":
 
                     //find all gameobject with tag of the turn's color
-                    //if none come up you need a 1 or 2 to spawn a piece
-                    //if some come up you can either select a piece or spawn a piece
+                        //if none come up you need a 1 or 2 to spawn a piece
+                        //if some come up you can either select a piece or spawn a piece
+                    Debug.Log("Wait for Piece Select");
                     yield return selectPiece(GameObject.FindGameObjectsWithTag("Red"), RedSpawn);
-                    //go to turn's cam and move selected piece
+                    //if not spawned
                     yield return camRed();
-                    yield return move(turns[turn]);
+                        yield return move(turns[turn]);
 
                     break;
             }
