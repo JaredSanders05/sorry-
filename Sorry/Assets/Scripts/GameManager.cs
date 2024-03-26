@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     List<string> turns;
     int i = 0;
-    int diceNum;
+    float diceNum;
     int currentBox;
     int nextBox;
     float unit = 1.234286f;
@@ -107,7 +107,13 @@ public class GameManager : MonoBehaviour
             case "red": Camera.GetComponent<CameraMovement>().changeCam(3); break;
             case "green": Camera.GetComponent<CameraMovement>().changeCam(2); break;
         }
-        yield return new WaitForSeconds(3f);
+        while (Dice.GetComponent<Dice>().getNumFaceUp() == -1)
+        {
+            yield return new WaitForSeconds(.5f);
+        }
+        
+        diceNum = Dice.GetComponent<Dice>().getNumFaceUp();
+        Dice.GetComponent<Dice>().resetNumFaceUp();
     }
 
     private IEnumerator camBlue()

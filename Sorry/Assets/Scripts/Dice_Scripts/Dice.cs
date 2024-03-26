@@ -57,6 +57,12 @@ public class Dice : MonoBehaviour
         return numFaceUp;
     }
 
+    public void resetNumFaceUp()
+    {
+        numFaceUp = -1;
+    }
+
+
     private void rollDice() {
         forceX = Random.Range(1, maxAppliedForce);
         forceY = Random.Range(1, maxAppliedForce);  
