@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414738, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2889,8 +2889,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1035188312}
   - component: {fileID: 1035188311}
-  - component: {fileID: 1035188310}
   - component: {fileID: 1035188309}
+  - component: {fileID: 1035188313}
   m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2906,21 +2906,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1035188308}
   m_Enabled: 1
---- !u!114 &1035188310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1035188308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f451a70b5c8cc9f4c9499b0ac65811b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: 0
-  duration: 2
-  conditionToCheck: 1
 --- !u!20 &1035188311
 Camera:
   m_ObjectHideFlags: 0
@@ -2987,6 +2972,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 797268306}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180}
+--- !u!114 &1035188313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035188308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f946a17a03113f4d9a7b67858b2d0d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: 0
+  duration: 2
+  conditionToCheck: 1
 --- !u!1 &1155391654
 GameObject:
   m_ObjectHideFlags: 0
@@ -3886,7 +3886,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1330403376}
-  - component: {fileID: 1330403375}
+  - component: {fileID: 1330403377}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3894,27 +3894,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1330403375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330403374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92d629e1061bc1746bc0ac6a5d7918ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Box: {fileID: 3595522239412767711, guid: 5653b637e38177c438d197c13fdbc398, type: 3}
-  RedSpawn: {fileID: 439216151203974475, guid: cb5c9b44aaaeebb4082e0918608cab89, type: 3}
-  GreenSpawn: {fileID: 2030141694715748758, guid: ed6b377697e313a44a12da4db8d77a9a, type: 3}
-  YellowSpawn: {fileID: 2432121587845667315, guid: b45d2c8a0599fe04f8a9202a4ce5f48f, type: 3}
-  BlueSpawn: {fileID: 4492449188649234045, guid: 2bd09896ccf330149b1765c1cb3e5220, type: 3}
-  RedHome: {fileID: 1749737678544405161, guid: 6052d0985c78fa446ad1aa5c7cdc568a, type: 3}
-  BlueHome: {fileID: 4450654471606873478, guid: 39c928c17e689f84283d712af4f32936, type: 3}
-  YellowHome: {fileID: 3277326156357042857, guid: 69f70967e5c58c5409f1e4333a089e0d, type: 3}
-  GreenHome: {fileID: 6979124053985409630, guid: 62ee6ed47fe81bc4b90d32edc16503e0, type: 3}
 --- !u!4 &1330403376
 Transform:
   m_ObjectHideFlags: 0
@@ -3930,6 +3909,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1330403377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330403374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac788433e916a8a42ab2a5d5b1cecfd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Box: {fileID: 3595522239412767711, guid: 5653b637e38177c438d197c13fdbc398, type: 3}
+  RedSpawn: {fileID: 439216151203974475, guid: cb5c9b44aaaeebb4082e0918608cab89, type: 3}
+  GreenSpawn: {fileID: 2030141694715748758, guid: ed6b377697e313a44a12da4db8d77a9a, type: 3}
+  YellowSpawn: {fileID: 2432121587845667315, guid: b45d2c8a0599fe04f8a9202a4ce5f48f, type: 3}
+  BlueSpawn: {fileID: 4492449188649234045, guid: 2bd09896ccf330149b1765c1cb3e5220, type: 3}
+  RedHome: {fileID: 1749737678544405161, guid: 6052d0985c78fa446ad1aa5c7cdc568a, type: 3}
+  BlueHome: {fileID: 4450654471606873478, guid: 39c928c17e689f84283d712af4f32936, type: 3}
+  YellowHome: {fileID: 3277326156357042857, guid: 69f70967e5c58c5409f1e4333a089e0d, type: 3}
+  GreenHome: {fileID: 6979124053985409630, guid: 62ee6ed47fe81bc4b90d32edc16503e0, type: 3}
 --- !u!1 &1395400153
 GameObject:
   m_ObjectHideFlags: 0
