@@ -189,10 +189,25 @@ public class GameManager : MonoBehaviour
             Debug.Log(turns[turn] + "'s turn");
             switch (turns[turn])
             {
-                case "Blue": yield return camBlue(); break;
-                case "Yellow": yield return camYellow(); break;
-                case "Green": yield return camGreen(); break;
-                case "Red": yield return camRed(); break;
+                case "Blue": 
+                    yield return camBlue();
+                    pointLight.GetComponent<Light>().color = new Color32(205, 222, 247, 100);
+                    break;
+
+                case "Yellow": 
+                    yield return camYellow();
+                    pointLight.GetComponent<Light>().color = new Color32(247, 247, 228, 100);
+                    break;
+
+                case "Green": 
+                    yield return camGreen();
+                    pointLight.GetComponent<Light>().color = new Color32(210, 250, 222, 100);
+                    break;
+
+                case "Red": 
+                    yield return camRed();
+                    pointLight.GetComponent<Light>().color = new Color32(255, 198, 194, 100);
+                    break;
             }
 
             Debug.Log("Wait for Dice Roll");
