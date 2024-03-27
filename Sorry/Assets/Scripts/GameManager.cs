@@ -85,19 +85,19 @@ public class GameManager : MonoBehaviour
         boxesYellow = new GameObject[6];
         for (int i = 56; i < 62; i++)
         {
-            boxesBlue[i - 56] = Instantiate(Box, new Vector3(2.25f + (1.3f * i), 0, 2.5f), Quaternion.identity);
+            boxesBlue[i - 56] = Instantiate(Box, new Vector3(2.25f + (1.3f * (i-56)), 0, 2.5f), Quaternion.identity);
             boxesBlue[i - 56].GetComponent<Box>().setIndex(i);
             boxesBlue[i - 56].GetComponent<Box>().setColor("Blue");
 
-            boxesRed[i - 56] = Instantiate(Box, new Vector3(14.75f, 0, 2.3f + (i*1.3f)), Quaternion.identity);
+            boxesRed[i - 56] = Instantiate(Box, new Vector3(14.75f, 0, 2.3f + ((i - 56) * 1.3f)), Quaternion.identity);
             boxesRed[i - 56].GetComponent<Box>().setIndex(i);
             boxesRed[i - 56].GetComponent<Box>().setColor("Red");
 
-            boxesGreen[i - 56] = Instantiate(Box, new Vector3(), Quaternion.identity);
+            boxesGreen[i - 56] = Instantiate(Box, new Vector3(15 - (1.25f * (i - 56)), 0, 14.75f), Quaternion.identity);
             boxesGreen[i - 56].GetComponent<Box>().setIndex(i);
             boxesGreen[i - 56].GetComponent<Box>().setColor("Green");
 
-            boxesYellow[i - 56] = Instantiate(Box, new Vector3(2.4f, 0 , 15 - (1.25f * i)), Quaternion.identity);
+            boxesYellow[i - 56] = Instantiate(Box, new Vector3(2.4f, 0 , 15 - (1.25f * (i - 56))), Quaternion.identity);
             boxesYellow[i - 56].GetComponent<Box>().setIndex(i);
             boxesYellow[i - 56].GetComponent<Box>().setColor("Yellow");
         }
