@@ -40,7 +40,7 @@ public class Home : MonoBehaviour
         }
     }
 
-    public bool getWin()
+    public bool won()
     {
         int cnt = 0;
 

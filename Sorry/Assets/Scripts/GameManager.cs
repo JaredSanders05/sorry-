@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
     public GameObject GreenHome;
     public GameObject pointLight;
     GameObject[] boxes;
+    GameObject[] boxesBlue;
+    GameObject[] boxesRed;
+    GameObject[] boxesGreen;
+    GameObject[] boxesYellow;
+
 
     List<string> turns;
     int i = 0;
@@ -74,6 +79,29 @@ public class GameManager : MonoBehaviour
         boxes[43].GetComponent<Box>().setColor("Red");
         boxes[51].GetComponent<Box>().setColor("Red");
 
+        boxesBlue = new GameObject[6];
+        boxesRed = new GameObject[6];
+        boxesGreen = new GameObject[6];
+        boxesYellow = new GameObject[6];
+        for (int i = 56; i < 62; i++)
+        {
+            boxesBlue[i - 56] = Instantiate(Box, new Vector3(2.25f + (1.3f * i), 0, 2.5f), Quaternion.identity);
+            boxesBlue[i - 56].GetComponent<Box>().setIndex(i);
+            boxesBlue[i - 56].GetComponent<Box>().setColor("Blue");
+
+            boxesRed[i - 56] = Instantiate(Box, new Vector3(), Quaternion.identity);
+            boxesRed[i - 56].GetComponent<Box>().setIndex(i);
+            boxesRed[i - 56].GetComponent<Box>().setColor("Red");
+
+            boxesGreen[i - 56] = Instantiate(Box, new Vector3(), Quaternion.identity);
+            boxesGreen[i - 56].GetComponent<Box>().setIndex(i);
+            boxesGreen[i - 56].GetComponent<Box>().setColor("Green");
+
+            boxesYellow[i - 56] = Instantiate(Box, new Vector3(), Quaternion.identity);
+            boxesYellow[i - 56].GetComponent<Box>().setIndex(i);
+            boxesYellow[i - 56].GetComponent<Box>().setColor("Yellow");
+        }
+
         RedSpawn = Instantiate(RedSpawn);
         GreenSpawn = Instantiate(GreenSpawn);
         YellowSpawn = Instantiate(YellowSpawn);
@@ -83,6 +111,11 @@ public class GameManager : MonoBehaviour
         RedHome = Instantiate(RedHome);
         GreenHome = Instantiate(GreenHome);
         YellowHome = Instantiate(YellowHome);
+    }
+
+    bool getWin()
+    {
+        return BlueHome.GetComponent<Home>().won() || RedHome.GetComponent<Home>().won() || GreenHome.GetComponent<Home>().won() || YellowHome.GetComponent<Home>().won(); 
     }
 
     // Update is called once per frame
@@ -97,10 +130,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //wait till dice has been rolled
     private IEnumerator rollDice(string turn)
     {
         Dice.GetComponent<Dice>().resetNumFaceUp();
+
         //call correct rotation
         switch (turn)
         {
@@ -142,11 +175,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
     }
 
-    //run till peice selected or spawned
     private IEnumerator selectPiece(string turn) 
     {
-        //can select or spawn a peice
-        //only can spawn piece if you rolled a 1 or 2
         List<GameObject> validPieces = new List<GameObject>();
 
         foreach (GameObject g in GameObject.FindGameObjectsWithTag(turn))
@@ -200,7 +230,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //run till move done
     private IEnumerator move(string turn)
     {
         //checks if current block is safezone entry
@@ -231,7 +260,7 @@ public class GameManager : MonoBehaviour
         //starts game with random turn
         int turn = Random.Range(0, turns.Count);
 
-        while (true)
+        while (!getWin())
         {
             Debug.Log(turns[turn] + "'s turn");
             switch (turns[turn])
@@ -315,6 +344,18 @@ public class GameManager : MonoBehaviour
             if (turn == turns.Count)
                 turn = 0;
         }
+
+        if (BlueHome.GetComponent<Home>().won())
+            Debug.Log("Blue Won!");
+
+        if (RedHome.GetComponent<Home>().won())
+            Debug.Log("Red Won!");
+        
+        if (GreenHome.GetComponent<Home>().won())
+            Debug.Log("Green Won!");
+        
+        if (YellowHome.GetComponent<Home>().won())
+            Debug.Log("Yellow Won!");
     }
 }
 

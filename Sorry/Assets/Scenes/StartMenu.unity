@@ -3926,10 +3926,6 @@ MonoBehaviour:
   GreenSpawn: {fileID: 2030141694715748758, guid: ed6b377697e313a44a12da4db8d77a9a, type: 3}
   YellowSpawn: {fileID: 2432121587845667315, guid: b45d2c8a0599fe04f8a9202a4ce5f48f, type: 3}
   BlueSpawn: {fileID: 4492449188649234045, guid: 2bd09896ccf330149b1765c1cb3e5220, type: 3}
-  RedHome: {fileID: 1749737678544405161, guid: 6052d0985c78fa446ad1aa5c7cdc568a, type: 3}
-  BlueHome: {fileID: 4450654471606873478, guid: 39c928c17e689f84283d712af4f32936, type: 3}
-  YellowHome: {fileID: 3277326156357042857, guid: 69f70967e5c58c5409f1e4333a089e0d, type: 3}
-  GreenHome: {fileID: 6979124053985409630, guid: 62ee6ed47fe81bc4b90d32edc16503e0, type: 3}
 --- !u!1 &1395400153
 GameObject:
   m_ObjectHideFlags: 0
