@@ -15,11 +15,13 @@ public class Dice : MonoBehaviour
     private float initY;
     public int click=0;
     private bool hoverClick;
+    bool disable;
 
     void OnMouseDown()
     {
+
         /*Do your stuff here*/
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !disable)
         {
             hoverClick = true;
         }
@@ -32,14 +34,19 @@ public class Dice : MonoBehaviour
         hadRoll = false;
         hoverClick = false;
         initY = rb.transform.position.y;
+        disable = false;
+    }
 
+    public void setDisable(bool b)
+    {
+        disable = b;
     }
 
     void Update()
     {
         if (rb != null)
         {
-            if (hoverClick && click==0)
+            if (hoverClick && click==0 && !disable)
             {
                 click=1;
                 rollDice();

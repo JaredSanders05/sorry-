@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
             boxesBlue[i - 56].GetComponent<Box>().setIndex(i);
             boxesBlue[i - 56].GetComponent<Box>().setColor("Blue");
 
-            boxesRed[i - 56] = Instantiate(Box, new Vector3(), Quaternion.identity);
+            boxesRed[i - 56] = Instantiate(Box, new Vector3(14.75f, 0, 2.3f + (i*1.3f)), Quaternion.identity);
             boxesRed[i - 56].GetComponent<Box>().setIndex(i);
             boxesRed[i - 56].GetComponent<Box>().setColor("Red");
 
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
             boxesGreen[i - 56].GetComponent<Box>().setIndex(i);
             boxesGreen[i - 56].GetComponent<Box>().setColor("Green");
 
-            boxesYellow[i - 56] = Instantiate(Box, new Vector3(), Quaternion.identity);
+            boxesYellow[i - 56] = Instantiate(Box, new Vector3(2.4f, 0 , 15 - (1.25f * i)), Quaternion.identity);
             boxesYellow[i - 56].GetComponent<Box>().setIndex(i);
             boxesYellow[i - 56].GetComponent<Box>().setColor("Yellow");
         }
@@ -132,6 +132,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator rollDice(string turn)
     {
+        Dice.GetComponent<Dice>().setDisable(false);
         Dice.GetComponent<Dice>().resetNumFaceUp();
 
         //call correct rotation
@@ -149,6 +150,7 @@ public class GameManager : MonoBehaviour
         }
         
         diceNum = Dice.GetComponent<Dice>().getNumFaceUp();
+        Dice.GetComponent<Dice>().setDisable(true);
     }
 
     private IEnumerator camBlue()
