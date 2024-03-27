@@ -6,7 +6,7 @@ public class CameraMovement : MonoBehaviour
 {
     private List<Transform> positions = new List<Transform>();
     public int cam;
-    public float duration = 5f; // Duration in seconds over which the object will move
+    public float duration = 2.5f; // Duration in seconds over which the object will move
     public bool conditionToCheck = true; // Runs this script if move is true
 
     public GameObject MainCam1;

@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     List<string> turns;
     int i = 0;
-    float diceNum;
+    int diceNum;
     int currentBox;
     int nextBox;
     float unit = 1.234286f;
@@ -65,14 +65,14 @@ public class GameManager : MonoBehaviour
         GreenSpawn.GetComponent<Spawn>().setBox(boxes[32]);
         YellowSpawn.GetComponent<Spawn>().setBox(boxes[18]);
         BlueSpawn.GetComponent<Spawn>().setBox(boxes[4]);
-        boxes[1].GetComponent<Box>().setColor("blue");
-        boxes[9].GetComponent<Box>().setColor("blue");
-        boxes[15].GetComponent<Box>().setColor("yellow");
-        boxes[23].GetComponent<Box>().setColor("yellow");
-        boxes[29].GetComponent<Box>().setColor("green");
-        boxes[37].GetComponent<Box>().setColor("green");
-        boxes[43].GetComponent<Box>().setColor("red");
-        boxes[51].GetComponent<Box>().setColor("red");
+        boxes[1].GetComponent<Box>().setColor("Blue");
+        boxes[9].GetComponent<Box>().setColor("Blue");
+        boxes[15].GetComponent<Box>().setColor("Yellow");
+        boxes[23].GetComponent<Box>().setColor("Yellow");
+        boxes[29].GetComponent<Box>().setColor("Green");
+        boxes[37].GetComponent<Box>().setColor("Green");
+        boxes[43].GetComponent<Box>().setColor("Red");
+        boxes[51].GetComponent<Box>().setColor("Red");
 
         RedSpawn = Instantiate(RedSpawn);
         GreenSpawn = Instantiate(GreenSpawn);
@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
     //wait till dice has been rolled
     private IEnumerator rollDice(string turn)
     {
+        Dice.GetComponent<Dice>().resetNumFaceUp();
         //call correct rotation
         switch (turn)
         {
@@ -108,47 +109,95 @@ public class GameManager : MonoBehaviour
             case "Red": Camera.GetComponent<CameraMovement>().changeCam(3); break;
             case "Green": Camera.GetComponent<CameraMovement>().changeCam(2); break;
         }
+
         while (Dice.GetComponent<Dice>().getNumFaceUp() == -1)
         {
             yield return new WaitForSeconds(.1f);
         }
         
         diceNum = Dice.GetComponent<Dice>().getNumFaceUp();
-        Dice.GetComponent<Dice>().resetNumFaceUp();
     }
 
     private IEnumerator camBlue()
     {
         Camera.GetComponent<CameraMovement>().changeCam(4);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
     }
 
     private IEnumerator camYellow()
     {
         Camera.GetComponent<CameraMovement>().changeCam(5);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
     }
 
     private IEnumerator camRed()
     {
         Camera.GetComponent<CameraMovement>().changeCam(7);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
     }
 
     private IEnumerator camGreen()
     {
         Camera.GetComponent<CameraMovement>().changeCam(6);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
     }
 
     //run till peice selected or spawned
-    private IEnumerator selectPiece(GameObject Spawn, string turn) 
+    private IEnumerator selectPiece(string turn) 
     {
         //can select or spawn a peice
         //only can spawn piece if you rolled a 1 or 2
+        List<GameObject> validPieces = new List<GameObject>();
 
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag(turn))
+        {
+            if (g.GetComponent<Piece>().getIndex() == -1 && diceNum >= 3)
+                continue;
 
-        yield return new WaitForSeconds(1f);
+            if (g.GetComponent<Piece>().getIndex() != -1)
+            {
+                nextBox = g.GetComponent<Piece>().getIndex() + diceNum;
+                if (nextBox >= 56)
+                    nextBox %= 56;
+                if (boxes[nextBox].GetComponent<Box>().getPieceColor() == turn)
+                    continue;
+            }
+
+            validPieces.Add(g);
+        }
+
+        if (validPieces.Count == 0)
+        {
+            currentBox = -2;
+            yield break;
+        }
+        Debug.Log("Waiting for Piece Select");
+        while (true)
+        {
+            yield return new WaitForSeconds(.1f);
+            if (Input.GetMouseButton(0))
+            {
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, 100))
+                {
+                    Debug.Log(hit.collider.tag);
+
+                    if (hit.collider.tag == turn)
+                    {
+                        if (validPieces.Contains(hit.collider.gameObject))
+                        {
+                            currentBox = hit.collider.gameObject.GetComponent<Piece>().getIndex();
+                            nextBox = currentBox + diceNum;
+                            if (nextBox >= 56)
+                                nextBox %= 56;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     //run till move done
@@ -156,27 +205,25 @@ public class GameManager : MonoBehaviour
     {
         //checks if current block is safezone entry
 
+        nextBox = currentBox + diceNum;
+        if (nextBox >= 56) //make sure index not out of bounds
+            nextBox %= 56;
 
-        /*if (nextBoxIndex >= 56) //make sure index not out of bounds
-            nextBoxIndex %= 56;
-
-        //check enter box
-        //
-        //check box color for slide
-        if (!boxes[nextBoxIndex].GetComponent<Box>().getColor().Equals(currentColor) && !boxes[nextBoxIndex].GetComponent<Box>().getColor().Equals("white"))
+        if (!boxes[nextBox].GetComponent<Box>().getColor().Equals(turn) && !boxes[nextBox].GetComponent<Box>().getColor().Equals("white"))
         {
-            boxes[randBoxIndex].GetComponent<Box>().movePiece(boxes[nextBoxIndex]);
+            boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
             yield return new WaitForSeconds(1f);
-            boxes[nextBoxIndex].GetComponent<Box>().movePiece(boxes[nextBoxIndex + 1]);
+            boxes[nextBox].GetComponent<Box>().movePiece(boxes[nextBox + 1]);
             yield return new WaitForSeconds(.5f);
-            boxes[nextBoxIndex + 1].GetComponent<Box>().movePiece(boxes[nextBoxIndex + 2]);
+            boxes[nextBox + 1].GetComponent<Box>().movePiece(boxes[nextBox + 2]);
             yield return new WaitForSeconds(.5f);
-            boxes[nextBoxIndex + 2].GetComponent<Box>().movePiece(boxes[nextBoxIndex + 3]);
+            boxes[nextBox + 2].GetComponent<Box>().movePiece(boxes[nextBox + 3]);
         }
         else
-            boxes[randBoxIndex].GetComponent<Box>().movePiece(boxes[nextBoxIndex]);*/
-
-        return null;
+        {
+            boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     private IEnumerator game(float waitTime)
@@ -210,59 +257,55 @@ public class GameManager : MonoBehaviour
                     break;
             }
 
-            Debug.Log("Wait for Dice Roll");
+            Debug.Log("Waiting for Dice Roll");
             yield return rollDice(turns[turn]);
 
             switch (turns[turn])
             {
                 case "Blue":
 
-                    //find all gameobject with tag of the turn's color
-                        //if none come up you need a 1 or 2 to spawn a piece
-                        //if some come up you can either select a piece or spawn a piece
-                    Debug.Log("Wait for Piece Select");
-                    yield return selectPiece(BlueSpawn, turns[turn]);
+                    yield return selectPiece(turns[turn]);
                     yield return camBlue();
-                    //if not spawned
+                    Debug.Log(currentBox);
+                    if (currentBox == -1)
+                        BlueSpawn.GetComponent<Spawn>().spawnPiece();
+                    else if (currentBox != -2)
                         yield return move(turns[turn]);
 
                     break;
 
                 case "Yellow":
 
-                    //find all gameobject with tag of the turn's color
-                        //if none come up you need a 1 or 2 to spawn a piece
-                        //if some come up you can either select a piece or spawn a piece
-                    Debug.Log("Wait for Piece Select");
-                    yield return selectPiece(YellowSpawn, turns[turn]);
+                    yield return selectPiece(turns[turn]);
                     yield return camYellow();
-                    //if not spawned
+                    Debug.Log(currentBox);
+                    if (currentBox == -1)
+                        YellowSpawn.GetComponent<Spawn>().spawnPiece();
+                    else if (currentBox != -2)
                         yield return move(turns[turn]);
 
                     break;
 
                 case "Green":
 
-                    //find all gameobject with tag of the turn's color
-                        //if none come up you need a 1 or 2 to spawn a piece
-                        //if some come up you can either select a piece or spawn a piece
-                    Debug.Log("Wait for Piece Select");
-                    yield return selectPiece(GreenSpawn, turns[turn]);
+                    yield return selectPiece(turns[turn]);
                     yield return camGreen();
-                    //if not spawned
+                    Debug.Log(currentBox);
+                    if (currentBox == -1)
+                        GreenSpawn.GetComponent<Spawn>().spawnPiece();
+                    else if (currentBox != -2)
                         yield return move(turns[turn]);
 
                     break;
 
                 case "Red":
 
-                    //find all gameobject with tag of the turn's color
-                        //if none come up you need a 1 or 2 to spawn a piece
-                        //if some come up you can either select a piece or spawn a piece
-                    Debug.Log("Wait for Piece Select");
-                    yield return selectPiece(RedSpawn, turns[turn]);
-                    //if not spawned
+                    yield return selectPiece(turns[turn]);
                     yield return camRed();
+                    Debug.Log(currentBox);
+                    if (currentBox == -1)
+                        RedSpawn.GetComponent<Spawn>().spawnPiece();
+                    else if (currentBox != -2)
                         yield return move(turns[turn]);
 
                     break;

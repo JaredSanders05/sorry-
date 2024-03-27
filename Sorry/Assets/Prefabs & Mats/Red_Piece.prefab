@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Spawn: {fileID: 439216151203974475, guid: cb5c9b44aaaeebb4082e0918608cab89, type: 3}
-  color: red
+  color: Red
   index: -1
 --- !u!54 &6451160249090653682
 Rigidbody:
@@ -147,5 +147,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5849165, y: 0.8000538, z: 0.5849165}
-  m_Center: {x: 0, y: 0.4000269, z: 0}
+  m_Size: {x: 0.5849165, y: 2.347279, z: 0.5849165}
+  m_Center: {x: 0, y: 1.17364, z: 0}

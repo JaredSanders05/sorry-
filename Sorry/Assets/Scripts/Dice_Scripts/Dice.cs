@@ -10,7 +10,7 @@ public class Dice : MonoBehaviour
     [SerializeField] private GameObject f1, f2, f3, f4, f5, f6;
     [SerializeField] private float maxAppliedForce, startAppliedForce;
     private float forceX, forceY, forceZ;
-    public float numFaceUp = -1;
+    public int numFaceUp = -1;
     public bool hadRoll, touchDown;
     private float initY;
     public int click=0;
@@ -52,7 +52,7 @@ public class Dice : MonoBehaviour
         }
     }
 
-    public float getNumFaceUp()
+    public int getNumFaceUp()
     {
         return numFaceUp;
     }

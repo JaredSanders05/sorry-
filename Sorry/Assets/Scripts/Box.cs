@@ -34,6 +34,11 @@ public class Box : MonoBehaviour
         this.index=index;
     }
 
+    public string getColor()
+    {
+        return color;
+    }
+
     public void movePiece(GameObject b)
     {
         StartCoroutine(wait(.5f,b));
@@ -73,15 +78,15 @@ public class Box : MonoBehaviour
         piece = null;
     }
 
-    public string getColor()
-    { 
-        return color;
+    public string getPieceColor()
+    {
+        if (piece == null)
+            return "white";
+
+        return piece.tag;
     }
 
-    public GameObject getPiece()
-    {
-        return piece;
-    }
+
 
     //may never be used
     public int getIndex()
@@ -102,10 +107,5 @@ public class Box : MonoBehaviour
     public void setPieceIndex(int i)
     {
         piece.GetComponent<Piece>().setIndex(i);
-    }
-
-    public string getPieceColor()
-    {
-        return piece.GetComponent<Piece>().getColor();
     }
 }
