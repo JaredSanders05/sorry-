@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -241,15 +242,33 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case "Yellow":
-                        if (boxes[nextBox].GetComponent<Box>().getPieceColor() == turn)
+                        //if going into safety zone
+                        if (nextBox > 16 && (index <= 16  && index >= 11))
+                        {
+                            if (boxesYellow[nextBox - 17].GetComponent<Box>().hasPiece())
+                                continue;
+                        }
+                        else if (boxes[nextBox].GetComponent<Box>().getPieceColor() == turn)
                             continue;
                         break;
                     case "Green":
-                        if (boxes[nextBox].GetComponent<Box>().getPieceColor() == turn)
+                        //if going into safety zone
+                        if (nextBox > 30 && (index <= 30 && index >= 25))
+                        {
+                            if (boxesGreen[nextBox - 31].GetComponent<Box>().hasPiece())
+                                continue;
+                        }
+                        else if (boxes[nextBox].GetComponent<Box>().getPieceColor() == turn)
                             continue;
                         break;
                     case "Red":
-                        if (boxes[nextBox].GetComponent<Box>().getPieceColor() == turn)
+                        //if going into safety zone
+                        if (nextBox > 44 && (index <= 44 && index >= 39))
+                        {
+                            if (boxesRed[nextBox - 45].GetComponent<Box>().hasPiece())
+                                continue;
+                        }
+                        else if (boxes[nextBox].GetComponent<Box>().getPieceColor() == turn)
                             continue;
                         break;
                 }
@@ -336,7 +355,22 @@ public class GameManager : MonoBehaviour
                     break;
 
                 case "Red":
-                    if (!boxes[nextBox].GetComponent<Box>().getColor().Equals(turn) && !boxes[nextBox].GetComponent<Box>().getColor().Equals("white"))
+
+                    //in safety zone
+                    if (currentBox > 55)
+                    {
+                        boxesRed[currentBox - 56].GetComponent<Box>().movePiece(boxesRed[nextBox - 56]);
+                        yield return new WaitForSeconds(1f);
+                    }
+                    // about to enter safety zone
+                    else if (nextBox > 44 && (currentBox <= 44 && currentBox >= 39))
+                    {
+                    //corner cuts
+                        boxes[currentBox].GetComponent<Box>().movePiece(boxesRed[nextBox - 45]);
+                        yield return new WaitForSeconds(1f);
+                    }
+                    //going to enter slide piece
+                    else if (!boxes[nextBox].GetComponent<Box>().getColor().Equals(turn) && !boxes[nextBox].GetComponent<Box>().getColor().Equals("white"))
                     {
                         boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
                         yield return new WaitForSeconds(1f);
@@ -346,14 +380,31 @@ public class GameManager : MonoBehaviour
                         yield return new WaitForSeconds(.5f);
                         boxes[nextBox + 2].GetComponent<Box>().movePiece(boxes[nextBox + 3]);
                     }
+                    //regular 
                     else
                     {
                         boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
                         yield return new WaitForSeconds(1f);
                     }
-                    break;
+
+                break;
+
                 case "Green":
-                    if (!boxes[nextBox].GetComponent<Box>().getColor().Equals(turn) && !boxes[nextBox].GetComponent<Box>().getColor().Equals("white"))
+          
+                    if (currentBox > 55)
+                    {
+                        boxesGreen[currentBox - 56].GetComponent<Box>().movePiece(boxesGreen[nextBox - 56]);
+                        yield return new WaitForSeconds(1f);
+                    }
+                    // about to enter safety zone
+                    else if (nextBox > 30 && (currentBox <= 30 && currentBox >= 25))
+                    {
+                        //corner cuts
+                        boxes[currentBox].GetComponent<Box>().movePiece(boxesGreen[nextBox - 31]);
+                        yield return new WaitForSeconds(1f);
+                    }
+                    //going to enter slide piece
+                    else if (!boxes[nextBox].GetComponent<Box>().getColor().Equals(turn) && !boxes[nextBox].GetComponent<Box>().getColor().Equals("white"))
                     {
                         boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
                         yield return new WaitForSeconds(1f);
@@ -363,29 +414,48 @@ public class GameManager : MonoBehaviour
                         yield return new WaitForSeconds(.5f);
                         boxes[nextBox + 2].GetComponent<Box>().movePiece(boxes[nextBox + 3]);
                     }
+                    //regular 
                     else
                     {
                         boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
                         yield return new WaitForSeconds(1f);
                     }
-                    break;
-                case "Yellow":
-                    if (!boxes[nextBox].GetComponent<Box>().getColor().Equals(turn) && !boxes[nextBox].GetComponent<Box>().getColor().Equals("white"))
-                    {
-                        boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
-                        yield return new WaitForSeconds(1f);
-                        boxes[nextBox].GetComponent<Box>().movePiece(boxes[nextBox + 1]);
-                        yield return new WaitForSeconds(.5f);
-                        boxes[nextBox + 1].GetComponent<Box>().movePiece(boxes[nextBox + 2]);
-                        yield return new WaitForSeconds(.5f);
-                        boxes[nextBox + 2].GetComponent<Box>().movePiece(boxes[nextBox + 3]);
-                    }
-                    else
-                    {
-                        boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
-                        yield return new WaitForSeconds(1f);
-                    }
-                    break;
+
+                break;
+
+            case "Yellow":
+
+                if (currentBox > 55)
+                {
+                    boxesYellow[currentBox - 56].GetComponent<Box>().movePiece(boxesYellow[nextBox - 56]);
+                    yield return new WaitForSeconds(1f);
+                }
+                // about to enter safety zone
+                else if (nextBox > 16 && (currentBox <= 16  && currentBox >= 11))
+                {
+                    //corner cuts
+                    boxes[currentBox].GetComponent<Box>().movePiece(boxesYellow[nextBox - 17]);
+                    yield return new WaitForSeconds(1f);
+                }
+                //going to enter slide piece
+                else if (!boxes[nextBox].GetComponent<Box>().getColor().Equals(turn) && !boxes[nextBox].GetComponent<Box>().getColor().Equals("white"))
+                {
+                    boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
+                    yield return new WaitForSeconds(1f);
+                    boxes[nextBox].GetComponent<Box>().movePiece(boxes[nextBox + 1]);
+                    yield return new WaitForSeconds(.5f);
+                    boxes[nextBox + 1].GetComponent<Box>().movePiece(boxes[nextBox + 2]);
+                    yield return new WaitForSeconds(.5f);
+                    boxes[nextBox + 2].GetComponent<Box>().movePiece(boxes[nextBox + 3]);
+                }
+                //regular 
+                else
+                {
+                    boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
+                    yield return new WaitForSeconds(1f);
+                }
+                
+                break;
             }
     }
 
