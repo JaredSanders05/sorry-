@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
+using Random = UnityEngine.Random;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -126,7 +129,7 @@ public class GameManager : MonoBehaviour
         //spawns peices
         if (i == 100)
         {
-            StartCoroutine(game(1f));
+            StartCoroutine(game());
         }
     }
 
@@ -183,16 +186,73 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject g in GameObject.FindGameObjectsWithTag(turn))
         {
-            if (g.GetComponent<Piece>().getIndex() == -1 && diceNum >= 3)
+            int index = g.GetComponent<Piece>().getIndex();
+
+            //not spawnable
+            if (index == -1 && diceNum >= 3)
                 continue;
 
-            if (g.GetComponent<Piece>().getIndex() != -1)
+            //in safe zone
+            if (index > 55)
             {
-                nextBox = g.GetComponent<Piece>().getIndex() + diceNum;
+                nextBox = index + diceNum;
+                if (nextBox > 61)
+                    continue;
+
+                switch (turn) 
+                {
+                    case "Blue":
+                        if (boxesBlue[nextBox-56].GetComponent<Box>().hasPiece())
+                            continue;
+                        break;
+                    case "Yellow":
+                        if (boxesYellow[nextBox - 56].GetComponent<Box>().hasPiece())
+                            continue;
+                        break;
+                    case "Green":
+                        if (boxesGreen[nextBox - 56].GetComponent<Box>().hasPiece())
+                            continue;
+                        break;
+                    case "Red":
+                        if (boxesRed[nextBox - 56].GetComponent<Box>().hasPiece())
+                            continue;
+                        break;
+                }
+            }
+
+            //in play
+            if (index != -1 && index < 56)
+            {
+                nextBox = index + diceNum;
                 if (nextBox >= 56)
                     nextBox %= 56;
-                if (boxes[nextBox].GetComponent<Box>().getPieceColor() == turn)
-                    continue;
+
+                switch (turn)
+                {
+                    case "Blue":
+                        //if going into safety zone
+                        if (nextBox > 2 && (index <= 2 || index >= 53))
+                        {
+                            if (boxesBlue[nextBox - 3].GetComponent<Box>().hasPiece())
+                                continue;
+                        }
+                        else if (boxes[nextBox].GetComponent<Box>().getPieceColor() == turn)
+                            continue;
+                        break;
+
+                    case "Yellow":
+                        if (boxes[nextBox].GetComponent<Box>().getPieceColor() == turn)
+                            continue;
+                        break;
+                    case "Green":
+                        if (boxes[nextBox].GetComponent<Box>().getPieceColor() == turn)
+                            continue;
+                        break;
+                    case "Red":
+                        if (boxes[nextBox].GetComponent<Box>().getPieceColor() == turn)
+                            continue;
+                        break;
+                }
             }
 
             validPieces.Add(g);
@@ -203,6 +263,7 @@ public class GameManager : MonoBehaviour
             currentBox = -2;
             yield break;
         }
+
         Debug.Log("Waiting for Piece Select");
         while (true)
         {
@@ -222,8 +283,11 @@ public class GameManager : MonoBehaviour
                         {
                             currentBox = hit.collider.gameObject.GetComponent<Piece>().getIndex();
                             nextBox = currentBox + diceNum;
-                            if (nextBox >= 56)
-                                nextBox %= 56;
+
+                            if (currentBox < 56) 
+                                if (nextBox >= 56)
+                                    nextBox %= 56;
+
                             break;
                         }
                     }
@@ -233,31 +297,99 @@ public class GameManager : MonoBehaviour
     }
 
     private IEnumerator move(string turn)
-    {
-        //checks if current block is safezone entry
+    {       
+            switch (turn) 
+            {
+                case "Blue":
 
-        nextBox = currentBox + diceNum;
-        if (nextBox >= 56) //make sure index not out of bounds
-            nextBox %= 56;
+                    //in safety zone
+                    if (currentBox > 55)
+                    {
+                        boxesBlue[currentBox-56].GetComponent<Box>().movePiece(boxesBlue[nextBox-56]);
+                        yield return new WaitForSeconds(1f);
+                    }
+                    // about to enter safety zone
+                    else if (nextBox > 2 && (currentBox <= 2 || currentBox >= 53))
+                    {
+                        //corner cuts
+                        boxes[currentBox].GetComponent<Box>().movePiece(boxesBlue[nextBox-3]);
+                        yield return new WaitForSeconds(1f);
+                    }
+                    //going to enter slide piece
+                    else if (!boxes[nextBox].GetComponent<Box>().getColor().Equals(turn) && !boxes[nextBox].GetComponent<Box>().getColor().Equals("white"))
+                    {
+                        boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
+                        yield return new WaitForSeconds(1f);
+                        boxes[nextBox].GetComponent<Box>().movePiece(boxes[nextBox + 1]);
+                        yield return new WaitForSeconds(.5f);
+                        boxes[nextBox + 1].GetComponent<Box>().movePiece(boxes[nextBox + 2]);
+                        yield return new WaitForSeconds(.5f);
+                        boxes[nextBox + 2].GetComponent<Box>().movePiece(boxes[nextBox + 3]);
+                    }
+                    //regular 
+                    else
+                    {
+                        boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
+                        yield return new WaitForSeconds(1f);
+                    }
+                    
+                    break;
 
-        if (!boxes[nextBox].GetComponent<Box>().getColor().Equals(turn) && !boxes[nextBox].GetComponent<Box>().getColor().Equals("white"))
-        {
-            boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
-            yield return new WaitForSeconds(1f);
-            boxes[nextBox].GetComponent<Box>().movePiece(boxes[nextBox + 1]);
-            yield return new WaitForSeconds(.5f);
-            boxes[nextBox + 1].GetComponent<Box>().movePiece(boxes[nextBox + 2]);
-            yield return new WaitForSeconds(.5f);
-            boxes[nextBox + 2].GetComponent<Box>().movePiece(boxes[nextBox + 3]);
-        }
-        else
-        {
-            boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
-            yield return new WaitForSeconds(1f);
-        }
+                case "Red":
+                    if (!boxes[nextBox].GetComponent<Box>().getColor().Equals(turn) && !boxes[nextBox].GetComponent<Box>().getColor().Equals("white"))
+                    {
+                        boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
+                        yield return new WaitForSeconds(1f);
+                        boxes[nextBox].GetComponent<Box>().movePiece(boxes[nextBox + 1]);
+                        yield return new WaitForSeconds(.5f);
+                        boxes[nextBox + 1].GetComponent<Box>().movePiece(boxes[nextBox + 2]);
+                        yield return new WaitForSeconds(.5f);
+                        boxes[nextBox + 2].GetComponent<Box>().movePiece(boxes[nextBox + 3]);
+                    }
+                    else
+                    {
+                        boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
+                        yield return new WaitForSeconds(1f);
+                    }
+                    break;
+                case "Green":
+                    if (!boxes[nextBox].GetComponent<Box>().getColor().Equals(turn) && !boxes[nextBox].GetComponent<Box>().getColor().Equals("white"))
+                    {
+                        boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
+                        yield return new WaitForSeconds(1f);
+                        boxes[nextBox].GetComponent<Box>().movePiece(boxes[nextBox + 1]);
+                        yield return new WaitForSeconds(.5f);
+                        boxes[nextBox + 1].GetComponent<Box>().movePiece(boxes[nextBox + 2]);
+                        yield return new WaitForSeconds(.5f);
+                        boxes[nextBox + 2].GetComponent<Box>().movePiece(boxes[nextBox + 3]);
+                    }
+                    else
+                    {
+                        boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
+                        yield return new WaitForSeconds(1f);
+                    }
+                    break;
+                case "Yellow":
+                    if (!boxes[nextBox].GetComponent<Box>().getColor().Equals(turn) && !boxes[nextBox].GetComponent<Box>().getColor().Equals("white"))
+                    {
+                        boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
+                        yield return new WaitForSeconds(1f);
+                        boxes[nextBox].GetComponent<Box>().movePiece(boxes[nextBox + 1]);
+                        yield return new WaitForSeconds(.5f);
+                        boxes[nextBox + 1].GetComponent<Box>().movePiece(boxes[nextBox + 2]);
+                        yield return new WaitForSeconds(.5f);
+                        boxes[nextBox + 2].GetComponent<Box>().movePiece(boxes[nextBox + 3]);
+                    }
+                    else
+                    {
+                        boxes[currentBox].GetComponent<Box>().movePiece(boxes[nextBox]);
+                        yield return new WaitForSeconds(1f);
+                    }
+                    break;
+            }
     }
 
-    private IEnumerator game(float waitTime)
+    private IEnumerator game()
     {
         //starts game with random turn
         int turn = Random.Range(0, turns.Count);
