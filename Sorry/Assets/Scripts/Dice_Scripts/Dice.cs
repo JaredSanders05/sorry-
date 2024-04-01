@@ -13,7 +13,6 @@ public class Dice : MonoBehaviour
     public int numFaceUp = -1;
     public bool hadRoll, touchDown;
     private float initY;
-    public int click=0;
     private bool hoverClick;
     bool disable;
 
@@ -46,9 +45,8 @@ public class Dice : MonoBehaviour
     {
         if (rb != null)
         {
-            if (hoverClick && click==0 && !disable)
+            if (hoverClick && !disable)
             {
-                click=1;
                 rollDice();
                 hoverClick = false;
             }
@@ -56,6 +54,11 @@ public class Dice : MonoBehaviour
         else
         {
             Debug.Log("Dice is null!");
+        }
+
+        if (transform.position.x < 5.5f || transform.position.x > 11.8 || transform.position.z < 5.5f || transform.position.z > 11.8)
+        {
+            transform.position = new Vector3(8.63f, .373f, 8.59f);
         }
     }
 

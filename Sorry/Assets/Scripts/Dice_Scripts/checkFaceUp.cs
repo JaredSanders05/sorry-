@@ -13,7 +13,6 @@ public class checkFaceUp : MonoBehaviour
         if (d.GetComponent<Rigidbody>().velocity == Vector3.zero && d.hadRoll) {
             d.numFaceUp = int.Parse(other.name);
             d.hadRoll = false ;
-            d.click = 0;
         }
     }
 
